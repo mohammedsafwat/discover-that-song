@@ -9,7 +9,9 @@ import Combine
 import Foundation
 
 class AuthorizationRemoteDataSource: AuthorizationDataSource {
+
     // MARK: - Properties
+    
     private var networkClient: RestNetworkClientProtocol
 
     // MARK: - Initializer
