@@ -12,8 +12,15 @@ import Foundation
 final class RestNetworkClient: RestNetworkClientProtocol {
 
     // MARK: - Properties
+
     var headers: [String: String] = [:]
     private var cancellable: Cancellable?
+
+    // MARK: - Deinit
+
+    deinit {
+        cancellable?.cancel()
+    }
 
     // MARK: - RestNetworkClientProtocol
 
@@ -29,6 +36,10 @@ final class RestNetworkClient: RestNetworkClientProtocol {
 
         let method: HTTPMethod = type == .GET ? .get : .post
         let headers = HTTPHeaders(self.headers.compactMap { HTTPHeader(name: $0, value: $1) })
+
+        if cancellable != nil {
+            cancellable?.cancel()
+        }
 
         cancellable = AF.request(
             url,
