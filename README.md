@@ -10,6 +10,6 @@ This project uses the following tools, libraries and practices:
 
 How to run 🛠
 -------
-* Clone the repo.
-* Checkout the `main` branch.
+* Clone the repo
+* Checkout the `main` branch
 * Run `DiscoverThatSong.xcodeproj`
