@@ -21,6 +21,12 @@ class TracksRemoteDataSource: TracksDataSource {
         self.networkClient = networkClient
     }
 
+    // MARK: - Deinitializer
+
+    deinit {
+        cancellable?.cancel()
+    }
+
     // MARK: - TracksDataSource
 
     var authorizationDataSource: AuthorizationDataSource {
@@ -33,13 +39,17 @@ class TracksRemoteDataSource: TracksDataSource {
             subject.eraseToAnyPublisher()
         }
 
+        if cancellable != nil {
+            cancellable?.cancel()
+        }
+        
         cancellable = authorizationDataSource.accessToken().flatMap { [unowned self] token -> AnyPublisher<Tracks, Error> in
             guard let url = URL(string: API.Tracks.EndpointURL) else {
                 subject.send(completion: .failure(DataError(type: .requestFailed)))
                 return publisher
             }
             let parameters = ["ids": ids]
-            self.networkClient.headers = ["Authorization": token.bearerToken]
+            self.networkClient.headers = [API.Authorization.HeaderKey: token.bearerToken]
             return self.networkClient.performRequest(url: url, type: .GET, parameters: parameters)
         }.sink { completion in
             subject.send(completion: completion)
