@@ -5,7 +5,7 @@
 //  Created by Mohammed Abdullatif on 2021-01-02.
 //
 
-struct Artist: Codable {
+struct Artist: Codable, Equatable {
     let externalUrls: [String: String]
     let id: String
     let name: String

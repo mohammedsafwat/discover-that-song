@@ -5,7 +5,7 @@
 //  Created by Mohammed Abdullatif on 2021-01-02.
 //
 
-struct Album: Codable {
+struct Album: Codable, Equatable {
     let albumType: String
     let artists: [Artist]
     let availableMarkets: [String]
