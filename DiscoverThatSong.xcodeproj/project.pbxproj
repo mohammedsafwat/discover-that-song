@@ -40,6 +40,10 @@
 		1AB7975825A09F18004EF2FD /* DataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB7975725A09F18004EF2FD /* DataError.swift */; };
 		1AB7976225A0B3B4004EF2FD /* RestNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB7976125A0B3B4004EF2FD /* RestNetworkClient.swift */; };
 		1AB7976A25A14E37004EF2FD /* DataErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB7976925A14E37004EF2FD /* DataErrorType.swift */; };
+		1AF7738F25D03BCC00E40FDA /* String+Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7738E25D03BCC00E40FDA /* String+Height.swift */; };
+		1AFB549325CEDD0A00DC8E8F /* TrackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFB549225CEDD0A00DC8E8F /* TrackCollectionViewCell.swift */; };
+		1AFB549825CEDD6E00DC8E8F /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFB549725CEDD6E00DC8E8F /* TrackView.swift */; };
+		1AFB549E25CEE72700DC8E8F /* UIImageView+Downloaded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFB549D25CEE72700DC8E8F /* UIImageView+Downloaded.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +102,10 @@
 		1AB7975725A09F18004EF2FD /* DataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataError.swift; sourceTree = "<group>"; };
 		1AB7976125A0B3B4004EF2FD /* RestNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestNetworkClient.swift; sourceTree = "<group>"; };
 		1AB7976925A14E37004EF2FD /* DataErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataErrorType.swift; sourceTree = "<group>"; };
+		1AF7738E25D03BCC00E40FDA /* String+Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Height.swift"; sourceTree = "<group>"; };
+		1AFB549225CEDD0A00DC8E8F /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
+		1AFB549725CEDD6E00DC8E8F /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
+		1AFB549D25CEE72700DC8E8F /* UIImageView+Downloaded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Downloaded.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +165,7 @@
 		1A0D942425BC494100A6F26E /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				1AFB549C25CEE6F900DC8E8F /* Extensions */,
 				1A0D942525BC495000A6F26E /* Tracks */,
 			);
 			path = Presentation;
@@ -176,6 +185,8 @@
 			isa = PBXGroup;
 			children = (
 				1AB796EE25A07CEC004EF2FD /* TracksViewController.swift */,
+				1AFB549225CEDD0A00DC8E8F /* TrackCollectionViewCell.swift */,
+				1AFB549725CEDD6E00DC8E8F /* TrackView.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -314,6 +325,15 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		1AFB549C25CEE6F900DC8E8F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1AFB549D25CEE72700DC8E8F /* UIImageView+Downloaded.swift */,
+				1AF7738E25D03BCC00E40FDA /* String+Height.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -450,6 +470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AFB549325CEDD0A00DC8E8F /* TrackCollectionViewCell.swift in Sources */,
 				1AB7975825A09F18004EF2FD /* DataError.swift in Sources */,
 				1AB7976225A0B3B4004EF2FD /* RestNetworkClient.swift in Sources */,
 				1AB7973225A0877B004EF2FD /* Image.swift in Sources */,
@@ -468,15 +489,18 @@
 				1A0D943625BC4AE500A6F26E /* TracksDataModule.swift in Sources */,
 				1AB796ED25A07CEC004EF2FD /* SceneDelegate.swift in Sources */,
 				1A0D944725BC4E2A00A6F26E /* DataModule.swift in Sources */,
+				1AFB549825CEDD6E00DC8E8F /* TrackView.swift in Sources */,
 				1AB7972025A083F8004EF2FD /* Track.swift in Sources */,
 				1A0D940E25BC3E0400A6F26E /* TracksDataSource.swift in Sources */,
 				1A0D945725BC56DA00A6F26E /* Tracks.swift in Sources */,
+				1AFB549E25CEE72700DC8E8F /* UIImageView+Downloaded.swift in Sources */,
 				1A0D945F25BD00D300A6F26E /* AuthorizationDataSource.swift in Sources */,
 				1A0D946425BD010D00A6F26E /* Token.swift in Sources */,
 				1AB7972825A0851B004EF2FD /* Album.swift in Sources */,
 				1A0D940625BC3DBD00A6F26E /* TracksRemoteDataSource.swift in Sources */,
 				1A0D946925BD01B400A6F26E /* AuthorizationRemoteDataSource.swift in Sources */,
 				1AB7974D25A09E18004EF2FD /* RequestType.swift in Sources */,
+				1AF7738F25D03BCC00E40FDA /* String+Height.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
