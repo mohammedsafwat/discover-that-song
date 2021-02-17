@@ -10,11 +10,6 @@ import Foundation
 
 class TracksRemoteDataSource: TracksDataSource {
 
-    // MARK: - Properties
-
-    private var networkClient: RestNetworkClientProtocol
-    private var cancellable: AnyCancellable?
-
     // MARK: - Initializer
 
     init(networkClient: RestNetworkClientProtocol) {
@@ -59,6 +54,11 @@ class TracksRemoteDataSource: TracksDataSource {
 
         return publisher
     }
+
+    // MARK: - Private
+
+    private var networkClient: RestNetworkClientProtocol
+    private var cancellable: AnyCancellable?
 
     private func tracks(url: URL, type: RequestType, parameters: [String: String]) -> AnyPublisher<Tracks, Error> {
         return networkClient.performRequest(url: url, type: .GET, parameters: parameters)
