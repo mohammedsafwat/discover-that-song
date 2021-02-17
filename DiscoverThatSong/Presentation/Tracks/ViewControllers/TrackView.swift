@@ -81,8 +81,9 @@ class TrackView: UIView {
         trackTitleLabel.numberOfLines = style.numberOfLines
         trackTitleLabel.textColor = style.textColor
         trackTitleLabel.textAlignment = .center
+
         layer.cornerRadius = style.cornerRadius
-        clipsToBounds = true
+        layer.masksToBounds = true
     }
 }
 
