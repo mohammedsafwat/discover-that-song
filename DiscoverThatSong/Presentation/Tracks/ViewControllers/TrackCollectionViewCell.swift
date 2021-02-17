@@ -10,6 +10,7 @@ class TrackCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         setUpViewHierarchy()
         setUpAutoLayout()
+        updateAppearance()
     }
 
     required init?(coder: NSCoder) {
@@ -53,6 +54,19 @@ class TrackCollectionViewCell: UICollectionViewCell {
             trackView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
+
+    private func updateAppearance() {
+        layer.shadowColor = style.shadowColor.cgColor
+        layer.shadowOffset = style.shadowSize
+        layer.shadowRadius = style.shadowRadius
+        layer.shadowOpacity = style.shadowOpacity
+        layer.masksToBounds = false
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: contentView.layer.cornerRadius).cgPath
+        layer.backgroundColor = UIColor.clear.cgColor
+
+        contentView.layer.masksToBounds = true
+        layer.cornerRadius = style.cornerRadius
+    }
 }
 
 extension TrackCollectionViewCell {
@@ -61,7 +75,11 @@ extension TrackCollectionViewCell {
         var textColor: UIColor = .darkText
         var font: UIFont = .boldSystemFont(ofSize: UIFont.systemFontSize)
         var numberOfLines: Int = 1
-        var cornerRadius: CGFloat = 4
+        var cornerRadius: CGFloat = 16.0
+        var shadowColor: UIColor = .gray
+        var shadowSize: CGSize = CGSize(width: 5, height: 15)
+        var shadowRadius: CGFloat = 16.0
+        var shadowOpacity: Float = 0.7
     }
 }
 
