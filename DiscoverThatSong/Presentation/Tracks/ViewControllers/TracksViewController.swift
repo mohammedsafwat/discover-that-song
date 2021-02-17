@@ -10,17 +10,7 @@ import UIKit
 
 public final class TracksViewController: UIViewController {
 
-    // MARK: - Properties
-
-    private let tracksCollectionView: UICollectionView
-    private let tracksCollectionViewCellIdentifier = "TracksCollectionViewCellIdentifier"
-    private let spacing: CGFloat = 16
-
-    private lazy var viewModel: TracksViewModel = {
-        let tracksDataSource = DataModule.shared.tracksRepository()
-        return TracksViewModel(tracksDataSource: tracksDataSource)
-    }()
-    private var cancellable: AnyCancellable?
+    // MARK: - NSCoding
 
     required init?(coder: NSCoder) {
         let collectionViewLayout = UICollectionViewFlowLayout()
@@ -29,31 +19,15 @@ public final class TracksViewController: UIViewController {
         super.init(coder: coder)
     }
 
+    // MARK: - UIViewController
+
     public override func viewDidLoad() {
         super.viewDidLoad()
 
         setUpViews()
         setUpAutoLayout()
         configureCollectionView()
-        updateAppearance()
-
-        // Testing
-        // TODO: Implement UI/data binding
-        if cancellable != nil {
-            cancellable?.cancel()
-        }
-
-        cancellable = viewModel.tracks.sink { completion in
-            switch completion {
-            case .failure(let error):
-                print("An error happened \(error)")
-            case .finished:
-                print("Finished")
-            }
-        } receiveValue: { [unowned self] tracks in
-            print("tracks \(tracks)")
-            self.model.tracks = tracks.tracks
-        }
+        viewModel.$tracks.sink { [weak self] _ in self?.updateAppearance() }.store(in: &disposables)
     }
 
     public override func viewDidLayoutSubviews() {
@@ -65,14 +39,6 @@ public final class TracksViewController: UIViewController {
     }
 
     // MARK: - Public
-
-    public var model = Model() {
-        didSet {
-            if oldValue != model {
-                updateAppearance()
-            }
-        }
-    }
 
     public var style = Style() {
         didSet {
@@ -112,13 +78,23 @@ public final class TracksViewController: UIViewController {
     private func updateAppearance() {
         tracksCollectionView.reloadData()
     }
+
+    private let tracksCollectionView: UICollectionView
+    private let tracksCollectionViewCellIdentifier = "TracksCollectionViewCellIdentifier"
+    private let spacing: CGFloat = 16
+
+    private var disposables = Set<AnyCancellable>()
+    private lazy var viewModel: TracksViewModel = {
+        let tracksDataSource = DataModule.shared.tracksRepository()
+        return TracksViewModel(tracksDataSource: tracksDataSource)
+    }()
 }
 
 // MARK: - UICollectionViewDataSource
 
 extension TracksViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.tracks.count
+        return viewModel.tracks.count
     }
 }
 
@@ -136,11 +112,11 @@ extension TracksViewController: UICollectionViewDelegate {
         ) as? TrackCollectionViewCell else {
             return UICollectionViewCell()
         }
-        guard indexPath.item < model.tracks.count else {
+        guard indexPath.item < viewModel.tracks.count else {
             return UICollectionViewCell()
         }
 
-        let track = model.tracks[indexPath.item]
+        let track = viewModel.tracks[indexPath.item]
         trackCell.model = track
         trackCell.accessibilityTraits = .button
         return trackCell
@@ -155,7 +131,7 @@ extension TracksViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let trackModel = model.tracks[indexPath.item]
+        let trackModel = viewModel.tracks[indexPath.item]
         return TrackCollectionViewCell.size(
             forWidth: view.bounds.width,
             model: trackModel,
